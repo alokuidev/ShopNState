@@ -1,54 +1,58 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 function App() {
-
   const [productList, setProductList] = useState([]);
-  const [productStatus , setProductState] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const api = "https://fakestoreapi.com/products";
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(api);
+      const data = await response.json();
+      setProductList(data);
+    } catch (error) {
+      console.error("Failed to fetch products", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch(api)
-      .then((response) => response.json()) // ✅ Return response.json()
-      .then((data) =>{
-        setProductList(data); // ✅ Log the data
-        setProductState(false);
-        console.log(data)
-      })
-      .catch((error) => console.error(error)); // ✅ Always handle error
+    fetchData();
   }, []);
-  
-   
+
   return (
     <div className="container">
       <h1 className="heading">Shopping Cart 🛒</h1>
 
       <div className="main-content">
         {/* Product List */}
-        
-        <div className="product-list">
-        {productStatus ? <p>Loading...</p> :
-          productList.map((elem)=>{
 
-         return (
-          <div className="product-card" key={elem.id}>
-            <img
-              src={elem.image}
-              alt="Product"
-              className="product-image"
-            />
-            <h2 className="product-title">
-              {
-                 elem.title.length > 20 ? elem.title.slice(0,10)+'...' : elem.title
-              }
-            </h2>
-            <p className="product-price">${elem.price}</p>
-            <button className="add-btn">Add to Cart</button>
-          </div>
-          )
-          })
-          }
+        <div className="product-list">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            productList.map((elem) => {
+              return (
+                <div className="product-card" key={elem.id}>
+                  <img
+                    src={elem.image}
+                    alt="Product"
+                    className="product-image"
+                  />
+                  <h2 className="product-title">
+                    {elem.title.length > 15
+                      ? elem.title.slice(0, 10) + "..."
+                      : elem.title}
+                  </h2>
+                  <p className="product-price">${elem.price}</p>
+                  <button className="add-btn">Add to Cart</button>
+                </div>
+              );
+            })
+          )}
         </div>
-        
+
         {/* Cart Section */}
         <div className="cart">
           <h2 className="cart-heading">Your Cart</h2>
