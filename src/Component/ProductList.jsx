@@ -1,11 +1,16 @@
 import React from "react";
 
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCart } from "../Redux/TodoSlice";
 const ProductList = () => {
+
+
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const api = "https://fakestoreapi.com/products";
-
+  const dispatch = useDispatch();
+   
   const fetchData = async () => {
     try {
       const response = await fetch(api);
@@ -38,7 +43,7 @@ const ProductList = () => {
                     : elem.title}
                 </h2>
                 <p className="product-price">${elem.price}</p>
-                <button className="add-btn">Add to Cart</button>
+                <button className="add-btn" onClick={() =>dispatch(addCart({id:elem.id,name:elem.title,price:elem.price}))}>Add to Cart</button>
               </div>
             );
           })
