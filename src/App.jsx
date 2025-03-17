@@ -1,5 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import Checkout from "./Component/Checkout";
 function App() {
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,7 @@ function App() {
   }, []);
 
   return (
+    <>
     <div className="container">
       <h1 className="heading">Shopping Cart 🛒</h1>
 
@@ -77,6 +79,8 @@ function App() {
         </div>
       </div>
     </div>
+    <Checkout/>
+    </>
   );
 }
 
