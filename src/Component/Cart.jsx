@@ -4,11 +4,13 @@ import { addCart, removeCart } from "../Redux/TodoSlice";
 
 const Cart = () => {
   const addedProduct = useSelector((state) => state.cartList);
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
   useEffect(() => {
-   const totalPrice = addedProduct.reduce((acc,item) => {return acc + (item.quantity * item.price)},0);
-   setTotalPrice(totalPrice)
+    const totalPrice = addedProduct.reduce((acc, item) => {
+      return acc + item.quantity * item.price;
+    }, 0);
+    setTotalPrice(totalPrice);
   }, [addedProduct]);
   return (
     <>
@@ -17,13 +19,29 @@ const Cart = () => {
         {addedProduct.map((elem) => {
           return (
             <div className="cart-item" key={elem.id}>
-              <p className="cart-item-name">{elem.name.length > 7 ? elem.name.slice(0,8)+'...': elem.name}</p>
+              <p className="cart-item-name">
+                {elem.name.length > 7
+                  ? elem.name.slice(0, 8) + "..."
+                  : elem.name}
+              </p>
               <div className="cart-quantity">
-                <button className="qty-btn" onClick={() =>dispatch(removeCart({id:elem.id}))}>-</button>
+                <button
+                  className="qty-btn"
+                  onClick={() => dispatch(removeCart({ id: elem.id }))}
+                >
+                  -
+                </button>
                 <span className="qty-number">{elem.quantity}</span>
-                <button className="qty-btn" onClick={() =>dispatch(addCart({id:elem.id}))}>+</button>
+                <button
+                  className="qty-btn"
+                  onClick={() => dispatch(addCart({ id: elem.id }))}
+                >
+                  +
+                </button>
               </div>
-              <p className="cart-item-price">{(elem.price * elem.quantity).toFixed(2)}</p>
+              <p className="cart-item-price">
+                {(elem.price * elem.quantity).toFixed(2)}
+              </p>
             </div>
           );
         })}

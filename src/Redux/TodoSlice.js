@@ -1,4 +1,3 @@
-import React from 'react'
 import { createSlice } from '@reduxjs/toolkit'
 
 
@@ -11,7 +10,6 @@ const TodoSlice = createSlice({
             const itemIndex = state.findIndex((item) => item.id === action.payload.id);
             if (itemIndex !== -1) {
                 // Product exists, increase quantity
-                //console.log(JSON.stringify(state));
                 state[itemIndex].quantity += 1;
               } else {
                 // New product, set quantity to 1
