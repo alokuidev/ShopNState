@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../Redux/TodoSlice";
+import { addCart, removeCart } from "../Redux/TodoSlice";
 
 const Cart = () => {
   const addedProduct = useSelector((state) => state.cartList);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(JSON.stringify(addedProduct));
+   // console.log(JSON.stringify(addedProduct));
   }, [addedProduct]);
   return (
     <>
@@ -17,9 +17,9 @@ const Cart = () => {
             <div className="cart-item" key={elem.id}>
               <p className="cart-item-name">{elem.name.length > 7 ? elem.name.slice(0,8)+'...': elem.name}</p>
               <div className="cart-quantity">
-                <button className="qty-btn">-</button>
+                <button className="qty-btn" onClick={() =>dispatch(removeCart({id:elem.id}))}>-</button>
                 <span className="qty-number">{elem.quantity}</span>
-                <button className="qty-btn" onClick={() =>dispatch(addCart({id:elem.id,name:elem.title,price:elem.price}))}>+</button>
+                <button className="qty-btn" onClick={() =>dispatch(addCart({id:elem.id}))}>+</button>
               </div>
               <p className="cart-item-price">${elem.price}</p>
             </div>
