@@ -14,7 +14,6 @@ function App() {
           <Cart />
         </div>
       </div>
-      <Checkout/>
     </Provider>
   );
 }
