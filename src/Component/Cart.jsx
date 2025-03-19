@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "../Redux/TodoSlice";
 
 const Cart = () => {
   const addedProduct = useSelector((state) => state.cartList);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log(JSON.stringify(addedProduct));
-    
   }, [addedProduct]);
   return (
     <>
@@ -19,7 +19,7 @@ const Cart = () => {
               <div className="cart-quantity">
                 <button className="qty-btn">-</button>
                 <span className="qty-number">{elem.quantity}</span>
-                <button className="qty-btn">+</button>
+                <button className="qty-btn" onClick={() =>dispatch(addCart({id:elem.id,name:elem.title,price:elem.price}))}>+</button>
               </div>
               <p className="cart-item-price">${elem.price}</p>
             </div>
