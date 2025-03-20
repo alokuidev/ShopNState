@@ -158,7 +158,10 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
+.backLink{
+  margin-top: 10px;
+  display: inline-block;
+}
 .checkout-heading {
   text-align: center;
   margin-bottom: 30px;

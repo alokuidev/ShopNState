@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, removeCart } from "../Redux/TodoSlice";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const addedProduct = useSelector((state) => state.cartList);
@@ -50,7 +51,10 @@ const Cart = () => {
           <p>
             Total: <span>${totalPrice.toFixed(2)}</span>
           </p>
-          <button className="checkout-btn">Checkout</button>
+          <Link to="/checkout">
+                <button className="checkout-btn">Checkout</button>
+          </Link>
+          
         </div>
       </div>
     </>

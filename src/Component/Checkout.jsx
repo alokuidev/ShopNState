@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Checkout = () => {
   return (
     <div className="checkout-container">
@@ -47,6 +49,7 @@ const Checkout = () => {
             <button type="submit" className="checkout-btn">
               Place Order
             </button>
+            <Link className="backLink" to='/'>Back to Product List</Link>
           </form>
         </div>
       </div>

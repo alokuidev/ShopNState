@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../Redux/TodoSlice";
+import Cart from "./Cart";
 const ProductList = () => {
   const [productList, setProductList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -60,6 +61,7 @@ const ProductList = () => {
           })
         )}
       </div>
+      <Cart />
     </>
   );
 };
