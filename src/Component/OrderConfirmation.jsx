@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const OrderConfirmation = () => {
+  const ConfirmOrderDetail = useSelector((state) => state.cartList.orderDetails);
+  
+  useEffect(() =>{
+        console.log(ConfirmOrderDetail);
+  },[])
   return (
     <>
       <div className="container">

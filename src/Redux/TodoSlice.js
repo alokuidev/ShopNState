@@ -31,6 +31,6 @@ const TodoSlice = createSlice({
     }
 })
 
-export const {addCart, removeCart} = TodoSlice.actions;
+export const {addCart, removeCart, userDetailSubmit} = TodoSlice.actions;
 
 export default TodoSlice.reducer;
