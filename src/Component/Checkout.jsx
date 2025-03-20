@@ -45,10 +45,11 @@ const Checkout = () => {
 
             <label htmlFor="zip">Zip Code</label>
             <input type="text" id="zip" placeholder="10001" />
-
+            <Link to='/OrderConfirmation'>
             <button type="submit" className="checkout-btn">
               Place Order
             </button>
+            </Link>
             <Link className="backLink" to='/'>Back to Product List</Link>
           </form>
         </div>
