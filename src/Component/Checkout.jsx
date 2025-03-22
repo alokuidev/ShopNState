@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { userDetailSubmit } from "../Redux/TodoSlice";
+import { userOrderDetail } from "../Redux/OrderDetail";
 
 const Checkout = () => {
-  const productDetail = useSelector((state) => state.cartList)
+  const productDetail = useSelector((state) => state.cartList);
   const [finalPrice,setFinalPrice] = useState(0);
   const [userDetail,setUserDetail] = useState({})
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Checkout = () => {
     setUserDetail ((prev) => ({...prev, [e.target.id]:e.target.value})) 
   }
   const orderCnfirm = () =>{
-    dispatch(userDetailSubmit({userDetail}))
+     dispatch(userOrderDetail(userDetail));
   }
   return (
     <div className="checkout-container">
@@ -42,7 +42,7 @@ const Checkout = () => {
               <strong>Total</strong>
             </p>
             <span>
-              <strong>{finalPrice}</strong>
+              <strong>{finalPrice.toFixed(2)}</strong>
             </span>
           </div>
         </div>

@@ -1,12 +1,20 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const OrderConfirmation = () => {
-  
+  const orderDetail = useSelector((state) => state.orderdetail);
+  const PlacedOrder = useSelector((state) => state.cartList);
+  const [totalPrice,setTotalPrice] = useState(); 
+  useEffect(() =>{
+      const totalPriceCal = PlacedOrder.reduce((acc,elem) => { return  acc + parseFloat(elem.quantity * elem.price)},0)
+      setTotalPrice(totalPriceCal.toFixed(2))
+    },[])
   return (
     <>
       <div className="container">
         <div className="confirmationBox">
-          <h2>🎉 Order Confirmed! ✅</h2>
+          <h2>🎉 Hey {orderDetail.name}, Your Order Is Confirmed! ✅</h2>
           <p>
             Thank you for your purchase! Your order has been successfully
             placed.
@@ -15,20 +23,20 @@ const OrderConfirmation = () => {
             <h3>Your Order</h3>
             <table>
               <tbody>
-                <tr>
-                  <td>Product Name 1</td>
-                  <td>$49.99</td>
-                </tr>
-                <tr>
-                  <td>Product Name 2</td>
-                  <td>$29.99</td>
-                </tr>
+                {PlacedOrder.map((elem) =>{
+                  return(
+                    <tr>
+                    <td>{elem.name}</td>
+                    <td>${elem.price * elem.quantity}</td>
+                  </tr>
+                  )
+                })}
                 <tr className="total">
                   <td>
                     <strong>Total</strong>
                   </td>
                   <td>
-                    <strong>$79.98</strong>
+                    <strong>${totalPrice}</strong>
                   </td>
                 </tr>
               </tbody>
